@@ -1,0 +1,23 @@
+app:
+  app-details:
+    desc: desc1
+    short-desc: short1
+    sub-apps:
+    - app1
+    - app1
+  language: tr
+  name-map:
+    en: english
+    es: spanish
+    tr: turkish
+  names:
+  - osman
+  - ali
+  - veli
+  port: 54334
+server:
+  http2:
+    enabled: false
+  port: 9090
+  ssl:
+    enabled: false
