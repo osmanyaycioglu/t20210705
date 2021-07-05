@@ -1,6 +1,7 @@
 package com.training.micro;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,6 +12,12 @@ public class MyOtherObject {
 
     @Autowired
     private MyObject myObject;
+
+    @Scheduled(fixedDelay = 5_000)
+    public void name() {
+        System.out.println("Other Schedule çalıştı...");
+    }
+
 
     public void sayHello() {
         this.counter++;

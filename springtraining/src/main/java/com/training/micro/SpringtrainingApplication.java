@@ -6,8 +6,15 @@ import javax.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
+//@SpringBootApplication(scanBasePackages = {
+//                                            "com.training.micro",
+//                                            "x.y.z"
+//})
 @SpringBootApplication
+@EnableScheduling
 public class SpringtrainingApplication {
 
     @Autowired
@@ -15,6 +22,11 @@ public class SpringtrainingApplication {
 
     @Autowired
     private MyOtherObject      myOtherObject1;
+
+    @Scheduled(fixedDelay = 10_000)
+    public void name() {
+        System.out.println("Schedule çalıştı...");
+    }
 
     //@Autowired
     public SpringtrainingApplication(final MyOtherObject myOtherObject2) {

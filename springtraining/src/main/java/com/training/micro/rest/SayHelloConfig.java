@@ -5,11 +5,17 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
 import com.training.micro.config.ApplicationProp;
 
+import x.y.z.ExtConfig;
+
 @Configuration
+@Import(ExtConfig.class)
+@PropertySource("classpath:my.properties")
 public class SayHelloConfig {
 
     @Autowired
@@ -27,6 +33,7 @@ public class SayHelloConfig {
     @Bean
     @Qualifier("dyn")
     public ISayHello createSayHello() {
+        System.out.println(this.env.getProperty("a.b.c"));
         switch (this.appProp.getLanguage()) {
             case "eng":
                 return new DynamicSayHello("Hello");

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.training.micro.SpringtrainingApplication;
 
+import x.y.z.MyExternalObject;
+
 //@Service
 //@Repository
 //@Controller
@@ -25,9 +27,13 @@ public class FirstRest {
     @Qualifier("dyn")
     private ISayHello                 sh;
 
+    @Autowired
+    private MyExternalObject          meo;
+
     @GetMapping("/hello/{abc}")
     public String hello(@PathVariable("abc") final String name) {
         this.sa.doSay();
+        this.meo.test();
         return this.sh.hello(name);
     }
 
