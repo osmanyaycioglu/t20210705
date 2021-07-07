@@ -41,7 +41,7 @@ public class OrderService {
         PaymentResponse payLoc = this.pc.pay(requestLoc);
 
         if (payLoc.getSuccess()) {
-            return "SUCCESS";
+            return "SUCCESS " + payLoc.getUid();
         } else {
             return "FAILED";
         }
@@ -59,17 +59,17 @@ public class OrderService {
                                                    requestLoc,
                                                    PaymentResponse.class);
         if (pr.getSuccess()) {
-            return "SUCCESS";
+            return "SUCCESS " + pr.getUid();
         } else {
             return "FAILED";
         }
     }
 
     public String place2(final Order orderParam) {
-        Application applicationLoc = this.ec.getApplication("ORDER");
+        Application applicationLoc = this.ec.getApplication("PAYMENT");
         List<InstanceInfo> instancesLoc = applicationLoc.getInstances();
         for (InstanceInfo instanceInfoLoc : instancesLoc) {
-            System.out.println("ORDER : " + instanceInfoLoc.getIPAddr() + ":" + instanceInfoLoc.getPort());
+            System.out.println("PAYMENT : " + instanceInfoLoc.getIPAddr() + ":" + instanceInfoLoc.getPort());
         }
         PaymentRequest requestLoc = new PaymentRequest();
         requestLoc.setName(orderParam.getName());
@@ -78,7 +78,7 @@ public class OrderService {
                               .toString());
         requestLoc.setAmount(new BigDecimal(100));
         RestTemplate restTemplateLoc = new RestTemplate();
-        InstanceInfo nextLoc = this.ec.getNextServerFromEureka("ORDER",
+        InstanceInfo nextLoc = this.ec.getNextServerFromEureka("PAYMENT",
                                                                false);
 
         PaymentResponse pr = restTemplateLoc.postForObject("http://"
@@ -89,7 +89,7 @@ public class OrderService {
                                                            requestLoc,
                                                            PaymentResponse.class);
         if (pr.getSuccess()) {
-            return "SUCCESS";
+            return "SUCCESS " + pr.getUid();
         } else {
             return "FAILED";
         }
