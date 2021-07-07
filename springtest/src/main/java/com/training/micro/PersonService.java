@@ -10,8 +10,9 @@ public class PersonService {
     private IPersonDao pDao;
 
 
-    public void add(final Person person) {
+    public String add(final Person person) {
         this.pDao.save(person);
+        return "OK";
     }
 
 }

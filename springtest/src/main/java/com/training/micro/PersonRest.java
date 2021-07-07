@@ -1,7 +1,6 @@
 package com.training.micro;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,7 @@ public class PersonRest {
     private PersonService ps;
 
     @PostMapping("/add")
-    public String add(@Validated @RequestBody final Person person) {
+    public String add(@RequestBody final Person person) {
         this.ps.add(person);
         return "SUCCESS";
     }
